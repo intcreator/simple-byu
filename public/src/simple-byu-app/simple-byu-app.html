@@ -25,18 +25,24 @@
 				padding: 1em;
 			}
 
+			input {
+				padding: .5em;
+				font-size: 1em;
+			}
+
     </style>
 
 		<div id="container">
 			<header>
 				<h1>Simple BYU</h1>
-				<p>This page includes links to everything that you wish was on the BYU homepage.  Contact Brandon Blätter on Slack, <a href="https://www.messenger.com/t/intcreator" target="_blank">Facebook</a>, or <a href="https://twitter.com/messages/compose?recipient_id=169717937" target="_blank">Twitter</a> (@intcreator) to suggest more links and features.</p>
+				<p>This page includes links to everything that you wish was on the BYU homepage.  Contact Brandon Blätter on Slack, <a href="https://www.messenger.com/t/intcreator" target="_blank">Facebook</a>, or <a href="https://twitter.com/messages/compose?recipient_id=169717937" target="_blank">Twitter</a> (@intcreator) to suggest more links and features.  Star or fork on <a href="https://github.com/intcreator/simple-byu" target="_blank">GitHub</a>.</p>
 			</header>
 
 			<!-- TODO: ADD FILTER TEXTBOX -->
+			<p>Filter: <iron-input bind-value="{{bindValue}}"><input value="{{filter::input}}"></iron-input></iron-input></p>
 
 			<h2>Links</h2>
-			<template is="dom-repeat" items="[[flattenedLinks]]" as="link">
+			<template is="dom-repeat" items="[[getLinks(flattenedLinks, filteredLinks, filter)]]" as="link">
 				<h3><a href="[[link.url]]">[[link.title]]</a></h3>
 				<p>[[link.description]]</p>
 			</template>
@@ -67,6 +73,11 @@
 									title: 'Personal Information',
 									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personSummary.cgi',
 									description: 'Update personal information such as name, phone, address, and marital status'
+								},
+								{
+									title: 'Guest Access',
+									url: 'https://y.byu.edu/ry/ae/prod/person/cgi/accessDelegationHome.cgi',
+									description: 'Give, receive, or utilize access to BYU accounts to pay account balance, see grades, and manage coursework'
 								}
 							],
 							calendar: [
@@ -81,6 +92,11 @@
 									title: 'Y Message',
 									url: 'https://saasta.byu.edu/auth/ymessage/student/',
 									description: 'For sending and receiving sensitive school related messages.'
+								},
+								{
+									title: 'Directory',
+									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personLookup.cgi',
+									description: 'Look up students and faculty'
 								}
 							],
 							dining: [
@@ -114,24 +130,51 @@
 									description: 'Manage on campus housing (single, married, and family)'
 								}
 							],
-							classes: [
+							courses: [
 								{
-									title: 'Weekly Schedule', // TODO: Add a script to calculate the current semester as the query param for year_term (1: winter, 3: spring, 4: summer, 5: fall)
+									title: 'Weekly Course Schedule', // TODO: Add a script to calculate the current semester as the query param for year_term (1: winter, 3: spring, 4: summer, 5: fall)
 									url: 'https://y.byu.edu/ry/ae/prod/registration/cgi/regMain.cgi?c=regMain&e=@ShowSched&year_term=20175',
-									description: 'Your weekly schedule for this semester'
+									description: 'Your weekly course schedule for this semester'
 								},
 								{
-									title: 'Class Registration',
+									title: 'MyMAP Plan',
+									url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/plan.cgi',
+									description: 'Arrange general education and major courses you want to take by semester'
+								},
+								{
+									title: 'MyMAP Register',
 									url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/register.cgi',
-									description: 'Add, drop, and withdraw from classes using MyMAP'
+									description: 'Add, drop, and withdraw from courses'
 								},
 								{
 									title: 'Grades',
 									url: 'https://y.byu.edu/ry/ae/prod/records/cgi/stdCourseWork.cgi',
-									description: 'See a summary of your grades'
+									description: 'See a summary of your grades spanning your whole time at BYU'
+								},
+								{
+									title: 'Learning Suite',
+									url: 'https://learningsuite.byu.edu/',
+									description: 'See grades, turn in assignments, take quizzes, and contact teachers using BYU\'s proprietary learning management system'
+								},
+								{
+									title: 'Canvas',
+									url: 'https://byu.instructure.com/',
+									description: 'See grades, turn in assignments, take quizzes, and contact teachers using a third party learning management system'
+								},
+								{
+									title: 'Booklist',
+									url: 'https://booklist.byu.edu/',
+									description: 'See what books are listed as required for your courses'
 								}
 							],
-							thirdParty: [
+							resources: [
+								{
+									title: 'Harold B. Lee Library (HBLL)',
+									url: 'https://lib.byu.edu/',
+									description: 'Check out books, magazines, videos, music, iPads, cameras, and more; do research across media; take software classes; use computers and recording and film studios'
+								}
+							],
+							unofficial: [
 								{
 									title: 'Piano Locator',
 									url: 'http://pianolocator.info/',
@@ -144,25 +187,34 @@
             type: Array,
             computed: 'flattenLinks(links)'
           },
-					stuff: {
+					filteredLinks: {
 						type: Array,
-						value: [
-							{
-								title: 'slkdf'
-							},
-							{
-								title: 'wles'
-							}
-						]
+						computed: 'filterLinks(flattenedLinks, filter)'
 					}
         };
       }
 
 			// take the categories, flatten and sort them for alphabetic view
-			flattenLinks(links) {
+			flattenLinks(links, filter) {
 				return Object.values(links)
 					.reduce((acc, val) => acc.concat(val))
 					.sort((a, b) => a.title.localeCompare(b.title));
+			}
+
+			// filter links by content
+			filterLinks(flattenedLinks, filter) {
+				const titleLinks = flattenedLinks.filter((link) => new RegExp(filter, 'i').test(link.title));
+				const descriptionLinks = flattenedLinks.filter((link) => new RegExp(filter, 'i').test(link.description));
+				return descriptionLinks
+					.reduce((acc, descriptionLink) => {
+						if(!titleLinks.filter((titleLink) => descriptionLink == titleLink).length)
+							return acc ? acc.concat([descriptionLink]) : acc;
+						else return acc;
+					}, titleLinks);
+			}
+
+			getLinks(flattenedLinks, filteredLinks, filter) {
+				return (!filter || filter === '') ? flattenedLinks : filteredLinks;
 			}
 
     }
