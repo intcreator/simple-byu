@@ -1,0 +1,7 @@
+{
+  "name": "simple-byu",
+  "short_name": "simple-byu",
+  "description": "A simplified version of BYU&#39;s homepage",
+  "start_url": "/",
+  "display": "standalone"
+}
