@@ -39,7 +39,7 @@
 			</header>
 
 			<!-- TODO: ADD FILTER TEXTBOX -->
-			<p>Filter: <iron-input bind-value="{{bindValue}}"><input value="{{filter::input}}"></iron-input></iron-input></p>
+			<p><iron-input bind-value="{{bindValue}}"><input id="filter" value="{{filter::input}}" placeholder="Filter..."></iron-input></iron-input></p>
 
 			<h2>Links</h2>
 			<template is="dom-repeat" items="[[getLinks(flattenedLinks, filteredLinks, filter)]]" as="link">
@@ -72,12 +72,24 @@
 								{
 									title: 'Personal Information',
 									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personSummary.cgi',
-									description: 'Update personal information such as name, phone, address, and marital status'
+									description: 'View and update personal information such as your name, phone, address, and marital status',
+									tags: ['ID']
+								},
+								{
+									title: 'ID Card',
+									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personIdCard.cgi',
+									description: 'View your BYU ID card, see the expiration date, or mark as lost or stolen'
 								},
 								{
 									title: 'Guest Access',
 									url: 'https://y.byu.edu/ry/ae/prod/person/cgi/accessDelegationHome.cgi',
 									description: 'Give, receive, or utilize access to BYU accounts to pay account balance, see grades, and manage coursework'
+								},
+								{
+									title: 'Duo',
+									url: 'https://duo.byu.edu/',
+									description: 'Set up two factor authentication for your BYU account using the Duo service',
+									tags: ['2']
 								}
 							],
 							calendar: [
@@ -85,6 +97,11 @@
 									title: 'Academic Calendar',
 									url: 'https://registrar.byu.edu/academic-calendar',
 									description: 'A high level view of the school year (add/drop deadline, finals schedule, etc.)'
+								},
+								{
+									title: 'Devotional Schedule',
+									url: 'https://calendar.byu.edu/categories/devotionals-forums',
+									description: 'View the schedule for upcoming devotionals, forums, and other weekly Tuesday events'
 								}
 							],
 							communication: [
@@ -108,9 +125,15 @@
 							],
 							finance: [
 								{
-									title: 'Y Time',
+									title: 'Y-Time',
 									url: 'https://hrms.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_EMPLOYEE_SELF_SERVICE.Y_TL_TIME_ENTRY.GBL',
-									description: 'Clock in and out of your on-campus jobs'
+									description: 'Clock in and out of your on-campus jobs',
+									tags: ['ytime', 'y time', 'employment']
+								},
+								{
+									title: 'Employee Timesheet',
+									url: 'https://hrms.byu.edu/psc/ps/EMPLOYEE/HRMS/c/ROLE_EMPLOYEE.TL_MSS_EE_SRCH_PRD.GBL',
+									description: 'Correct mis-punches when clocking in and out'
 								},
 								{
 									title: 'My Financial Center',
@@ -149,7 +172,8 @@
 								{
 									title: 'Grades',
 									url: 'https://y.byu.edu/ry/ae/prod/records/cgi/stdCourseWork.cgi',
-									description: 'See a summary of your grades spanning your whole time at BYU'
+									description: 'See a summary of your grades (an unofficial transcript) spanning your whole time at BYU',
+									tags: ['aim']
 								},
 								{
 									title: 'Learning Suite',
@@ -164,7 +188,13 @@
 								{
 									title: 'Booklist',
 									url: 'https://booklist.byu.edu/',
-									description: 'See what books are listed as required for your courses'
+									description: 'See what books are listed as required for your courses',
+									tags: ['textbooks']
+								},
+								{
+									title: 'Testing Center',
+									url: 'https://testing.byu.edu/',
+									description: 'Check the hours for the testing center and see the current line conditions'
 								}
 							],
 							resources: [
@@ -172,6 +202,21 @@
 									title: 'Harold B. Lee Library (HBLL)',
 									url: 'https://lib.byu.edu/',
 									description: 'Check out books, magazines, videos, music, iPads, cameras, and more; do research across media; take software classes; use computers and recording and film studios'
+								},
+								{
+									title: 'BYU Speeches',
+									url: 'https://speeches.byu.edu/',
+									description: 'Read or listen to speeches given by professors, general authorities, and other BYU guests, alumni, and faculty'
+								},
+								{
+									title: 'Live BYU TV',
+									url: 'https://byutvstage.byu.edu/watch/livetv',
+									description: 'Watch BYU TV live (devotionals, sports, shows)'
+								},
+								{
+									title: 'Interactive Parking Map',
+									url: 'http://map.byu.edu/?parking',
+									description: 'Find a place to park on campus'
 								}
 							],
 							unofficial: [
@@ -194,6 +239,12 @@
         };
       }
 
+			connectedCallback() {
+				super.connectedCallback();
+				this.shadowRoot.querySelector('#filter').select()
+				console.log('Contribute: https://github.com/intcreator/simple-byu');
+			}
+
 			// take the categories, flatten and sort them for alphabetic view
 			flattenLinks(links, filter) {
 				return Object.values(links)
@@ -203,8 +254,12 @@
 
 			// filter links by content
 			filterLinks(flattenedLinks, filter) {
+				// get matching title links
 				const titleLinks = flattenedLinks.filter((link) => new RegExp(filter, 'i').test(link.title));
+				// get matching description links
 				const descriptionLinks = flattenedLinks.filter((link) => new RegExp(filter, 'i').test(link.description));
+				// TODO: search tags
+				// return title links and non-redundant description links
 				return descriptionLinks
 					.reduce((acc, descriptionLink) => {
 						if(!titleLinks.filter((titleLink) => descriptionLink == titleLink).length)
