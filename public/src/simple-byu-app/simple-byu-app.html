@@ -88,7 +88,7 @@
 								{
 									title: 'Duo',
 									url: 'https://duo.byu.edu/',
-									description: 'Set up two factor authentication for your BYU account using the Duo service',
+									description: 'Set up or disable two factor authentication for your BYU account using the Duo service',
 									tags: ['2']
 								}
 							],
@@ -157,17 +157,20 @@
 								{
 									title: 'Weekly Course Schedule', // TODO: Add a script to calculate the current semester as the query param for year_term (1: winter, 3: spring, 4: summer, 5: fall)
 									url: 'https://y.byu.edu/ry/ae/prod/registration/cgi/regMain.cgi?c=regMain&e=@ShowSched&year_term=20175',
-									description: 'Your weekly course schedule for this semester'
+									description: 'Your weekly course schedule for this semester',
+									tags: ['classes']
 								},
 								{
 									title: 'MyMAP Plan',
 									url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/plan.cgi',
-									description: 'Arrange general education and major courses you want to take by semester'
+									description: 'Arrange general education and major courses you want to take by semester',
+									tags: ['classes']
 								},
 								{
 									title: 'MyMAP Register',
 									url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/register.cgi',
-									description: 'Add, drop, and withdraw from courses'
+									description: 'Add, drop, and withdraw from courses',
+									tags: ['classes']
 								},
 								{
 									title: 'Grades',
@@ -178,12 +181,14 @@
 								{
 									title: 'Learning Suite',
 									url: 'https://learningsuite.byu.edu/',
-									description: 'See grades, turn in assignments, take quizzes, and contact teachers using BYU\'s proprietary learning management system'
+									description: 'See grades, turn in assignments, take quizzes, and contact teachers using BYU\'s proprietary learning management system',
+									tags: ['classes']
 								},
 								{
 									title: 'Canvas',
 									url: 'https://byu.instructure.com/',
-									description: 'See grades, turn in assignments, take quizzes, and contact teachers using a third party learning management system'
+									description: 'See grades, turn in assignments, take quizzes, and contact teachers using a third party learning management system',
+									tags: ['classes']
 								},
 								{
 									title: 'Booklist',
@@ -194,7 +199,14 @@
 								{
 									title: 'Testing Center',
 									url: 'https://testing.byu.edu/',
-									description: 'Check the hours for the testing center and see the current line conditions'
+									description: 'Check the hours for the testing center and see the current line conditions',
+									tags: ['tests', 'exams']
+								},
+								{
+									title: 'Final Exam Schedule',
+									url: 'https://y.byu.edu/ry/ae/prod/class_schedule/cgi/examStudentSchedule.cgi',
+									description: 'Find out when and where your final exams will be administered',
+									tags: ['tests', 'finals']
 								}
 							],
 							testing: [
@@ -213,7 +225,8 @@
 								{
 									title: 'BYU Speeches',
 									url: 'https://speeches.byu.edu/',
-									description: 'Read or listen to speeches given by professors, general authorities, and other BYU guests, alumni, and faculty'
+									description: 'Read or listen to speeches given by professors, general authorities, and other BYU guests, alumni, and faculty',
+									tags: ['devotionals']
 								},
 								{
 									title: 'Live BYU TV',
@@ -223,7 +236,8 @@
 								{
 									title: 'Interactive Parking Map',
 									url: 'http://map.byu.edu/?parking',
-									description: 'Find a place to park on campus'
+									description: 'Find a place to park on campus',
+									tags: ['cars']
 								}
 							],
 							unofficial: [
@@ -261,13 +275,15 @@
 
 			// filter links by content
 			filterLinks(flattenedLinks, filter) {
+				const re = new RegExp(filter, 'i')
+				console.log(re);
 				// get matching title links
-				const titleLinks = flattenedLinks.filter((link) => new RegExp(filter, 'i').test(link.title));
+				const titleLinks = flattenedLinks.filter((link) => re.test(link.title));
 				// get matching description links
-				const descriptionLinks = flattenedLinks.filter((link) => new RegExp(filter, 'i').test(link.description));
+				const otherLinks = flattenedLinks.filter((link) => re.test(link.description) || (link.tags && re.test(link.tags.join(' '))));
 				// TODO: search tags
 				// return title links and non-redundant description links
-				return descriptionLinks
+				return otherLinks
 					.reduce((acc, descriptionLink) => {
 						if(!titleLinks.filter((titleLink) => descriptionLink == titleLink).length)
 							return acc ? acc.concat([descriptionLink]) : acc;
