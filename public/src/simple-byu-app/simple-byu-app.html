@@ -48,7 +48,7 @@
 			</template>
 
 			<footer>
-				<p>Simple BYU created and maintained by <a href="https://intcreator.com/" target="_blank">Brandon Blätter</a>.</p>
+				<p>Simple BYU created and maintained by <a href="https://intcreator.com/" target="_blank">Brandon der Blätter</a>.</p>
 			</footer>
 		</div>
 
@@ -61,239 +61,238 @@
      */
     class SimpleByuApp extends Polymer.Element {
 
-      static get is() { return 'simple-byu-app'; }
+		static get is() { return 'simple-byu-app'; }
 
-      static get properties() {
-        return {
-					links: {
-						type: Object,
-						value: {
-							account: [
-								{
-									title: 'Personal Information',
-									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personSummary.cgi',
-									description: 'View and update personal information such as your name, phone, address, and marital status',
-									tags: ['ID']
-								},
-								{
-									title: 'ID Card',
-									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personIdCard.cgi',
-									description: 'View your BYU ID card, see the expiration date, or mark as lost or stolen'
-								},
-								{
-									title: 'Guest Access',
-									url: 'https://y.byu.edu/ry/ae/prod/person/cgi/accessDelegationHome.cgi',
-									description: 'Give, receive, or utilize access to BYU accounts to pay account balance, see grades, and manage coursework'
-								},
-								{
-									title: 'Duo',
-									url: 'https://duo.byu.edu/',
-									description: 'Set up or disable two factor authentication for your BYU account using the Duo service',
-									tags: ['2']
-								}
-							],
-							calendar: [
-								{
-									title: 'Academic Calendar',
-									url: 'https://registrar.byu.edu/academic-calendar',
-									description: 'A high level view of the school year (add/drop deadline, finals schedule, etc.)'
-								},
-								{
-									title: 'Devotional Schedule',
-									url: 'https://calendar.byu.edu/categories/devotionals-forums',
-									description: 'View the schedule for upcoming devotionals, forums, and other weekly Tuesday events'
-								}
-							],
-							communication: [
-								{
-									title: 'Y Message',
-									url: 'https://saasta.byu.edu/auth/ymessage/student/',
-									description: 'For sending and receiving sensitive school related messages.'
-								},
-								{
-									title: 'Directory',
-									url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personLookup.cgi',
-									description: 'Look up students and faculty'
-								}
-							],
-							dining: [
-								{
-									title: 'My Dining Account',
-									url: 'https://sasapps.byu.edu/services/dining/',
-									description: 'Manage meal plans for the Cannon Center, Cougareat, and more'
-								}
-							],
-							finance: [
-								{
-									title: 'Y-Time',
-									url: 'https://hrms.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_EMPLOYEE_SELF_SERVICE.Y_TL_TIME_ENTRY.GBL',
-									description: 'Clock in and out of your on-campus jobs',
-									tags: ['ytime', 'y time', 'employment']
-								},
-								{
-									title: 'Employee Timesheet',
-									url: 'https://hrms.byu.edu/psc/ps/EMPLOYEE/HRMS/c/ROLE_EMPLOYEE.TL_MSS_EE_SRCH_PRD.GBL',
-									description: 'Correct mis-punches when clocking in and out'
-								},
-								{
-									title: 'My Financial Center',
-									url: 'https://sa.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_MY_FINANCIAL_CENTER.Y_MFC_HOME',
-									description: 'Make payments on tuition, on campus rent and utilities, and other fees'
-								},
-								{
-									title: 'Cougar Cash',
-									url: 'https://sa.byu.edu/psc/ps/EMPLOYEE/HRMS/c/Y_MY_FINANCIAL_CENTER.Y_SIG_HOME_FL.GBL?Page=Y_SIG_HOME_FL',
-									description: 'Use your BYU ID card to pay for printing and other amenities on campus'
-								}
-							],
-							housing: [
-								{
-									title: 'My Housing Account',
-									url: 'https://sasapps.byu.edu/secure/services/main/default.aspx',
-									description: 'Manage on campus housing (single, married, and family)'
-								}
-							],
-							courses: [
-								{
-									title: 'Weekly Course Schedule', // TODO: Add a script to calculate the current semester as the query param for year_term (1: winter, 3: spring, 4: summer, 5: fall)
-									url: 'https://y.byu.edu/ry/ae/prod/registration/cgi/regMain.cgi?c=regMain&e=@ShowSched&year_term=20175',
-									description: 'Your weekly course schedule for this semester',
-									tags: ['classes']
-								},
-								{
-									title: 'MyMAP Plan',
-									url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/plan.cgi',
-									description: 'Arrange general education and major courses you want to take by semester',
-									tags: ['classes']
-								},
-								{
-									title: 'MyMAP Register',
-									url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/register.cgi',
-									description: 'Add, drop, and withdraw from courses',
-									tags: ['classes']
-								},
-								{
-									title: 'Grades',
-									url: 'https://y.byu.edu/ry/ae/prod/records/cgi/stdCourseWork.cgi',
-									description: 'See a summary of your grades (an unofficial transcript) spanning your whole time at BYU',
-									tags: ['aim']
-								},
-								{
-									title: 'Learning Suite',
-									url: 'https://learningsuite.byu.edu/',
-									description: 'See grades, turn in assignments, take quizzes, and contact teachers using BYU\'s proprietary learning management system',
-									tags: ['classes']
-								},
-								{
-									title: 'Canvas',
-									url: 'https://byu.instructure.com/',
-									description: 'See grades, turn in assignments, take quizzes, and contact teachers using a third party learning management system',
-									tags: ['classes']
-								},
-								{
-									title: 'Booklist',
-									url: 'https://booklist.byu.edu/',
-									description: 'See what books are listed as required for your courses',
-									tags: ['textbooks']
-								},
-								{
-									title: 'Testing Center',
-									url: 'https://testing.byu.edu/',
-									description: 'Check the hours for the testing center and see the current line conditions',
-									tags: ['tests', 'exams']
-								},
-								{
-									title: 'Final Exam Schedule',
-									url: 'https://y.byu.edu/ry/ae/prod/class_schedule/cgi/examStudentSchedule.cgi',
-									description: 'Find out when and where your final exams will be administered',
-									tags: ['tests', 'finals']
-								}
-							],
-							testing: [
-								{
-									title: 'Current tests',
-									url: 'https://testing.byu.edu/my-exams',
-									description: 'View current and upcoming exams and the days you can take them'
-								}
-							],
-							resources: [
-								{
-									title: 'Harold B. Lee Library (HBLL)',
-									url: 'https://lib.byu.edu/',
-									description: 'Check out books, magazines, videos, music, iPads, cameras, and more; do research across media; take software classes; use computers and recording and film studios'
-								},
-								{
-									title: 'BYU Speeches',
-									url: 'https://speeches.byu.edu/',
-									description: 'Read or listen to speeches given by professors, general authorities, and other BYU guests, alumni, and faculty',
-									tags: ['devotionals']
-								},
-								{
-									title: 'Live BYU TV',
-									url: 'https://byutvstage.byu.edu/watch/livetv',
-									description: 'Watch BYU TV live (devotionals, sports, shows)'
-								},
-								{
-									title: 'Interactive Parking Map',
-									url: 'http://map.byu.edu/?parking',
-									description: 'Find a place to park on campus',
-									tags: ['cars']
-								}
-							],
-							unofficial: [
-								{
-									title: 'Piano Locator',
-									url: 'http://pianolocator.info/',
-									description: 'Locate Pianos on campus'
-								}
-							]
-						}
-					},
-          flattenedLinks: {
-            type: Array,
-            computed: 'flattenLinks(links)'
-          },
-					filteredLinks: {
-						type: Array,
-						computed: 'filterLinks(flattenedLinks, filter)'
+		static get properties() {
+			return {
+				links: {
+					type: Object,
+					value: {
+						account: [
+							{
+								title: 'Personal Information',
+								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personSummary.cgi',
+								description: 'View and update personal information such as your name, phone, address, and marital status',
+								tags: ['ID']
+							},
+							{
+								title: 'ID Card',
+								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personIdCard.cgi',
+								description: 'View your BYU ID card, see the expiration date, or mark as lost or stolen'
+							},
+							{
+								title: 'Guest Access',
+								url: 'https://y.byu.edu/ry/ae/prod/person/cgi/accessDelegationHome.cgi',
+								description: 'Give, receive, or utilize access to BYU accounts to pay account balance, see grades, and manage coursework'
+							},
+							{
+								title: 'Duo',
+								url: 'https://duo.byu.edu/',
+								description: 'Set up or disable two factor authentication for your BYU account using the Duo service',
+								tags: ['2']
+							}
+						],
+						calendar: [
+							{
+								title: 'Academic Calendar',
+								url: 'https://registrar.byu.edu/academic-calendar',
+								description: 'A high level view of the school year (add/drop deadline, finals schedule, etc.)'
+							},
+							{
+								title: 'Devotional Schedule',
+								url: 'https://calendar.byu.edu/categories/devotionals-forums',
+								description: 'View the schedule for upcoming devotionals, forums, and other weekly Tuesday events'
+							}
+						],
+						communication: [
+							{
+								title: 'Y Message',
+								url: 'https://saasta.byu.edu/auth/ymessage/student/',
+								description: 'For sending and receiving sensitive school related messages.'
+							},
+							{
+								title: 'Directory',
+								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personLookup.cgi',
+								description: 'Look up students and faculty'
+							}
+						],
+						dining: [
+							{
+								title: 'My Dining Account',
+								url: 'https://sasapps.byu.edu/services/dining/',
+								description: 'Manage meal plans for the Cannon Center, Cougareat, and more'
+							}
+						],
+						finance: [
+							{
+								title: 'Y-Time',
+								url: 'https://hrms.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_EMPLOYEE_SELF_SERVICE.Y_TL_TIME_ENTRY.GBL',
+								description: 'Clock in and out of your on-campus jobs',
+								tags: ['ytime', 'y time', 'employment']
+							},
+							{
+								title: 'Employee Timesheet',
+								url: 'https://hrms.byu.edu/psc/ps/EMPLOYEE/HRMS/c/ROLE_EMPLOYEE.TL_MSS_EE_SRCH_PRD.GBL',
+								description: 'Correct mis-punches when clocking in and out'
+							},
+							{
+								title: 'My Financial Center',
+								url: 'https://sa.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_MY_FINANCIAL_CENTER.Y_MFC_HOME',
+								description: 'Make payments on tuition, on campus rent and utilities, and other fees'
+							},
+							{
+								title: 'Cougar Cash',
+								url: 'https://sa.byu.edu/psc/ps/EMPLOYEE/HRMS/c/Y_MY_FINANCIAL_CENTER.Y_SIG_HOME_FL.GBL?Page=Y_SIG_HOME_FL',
+								description: 'Use your BYU ID card to pay for printing and other amenities on campus'
+							}
+						],
+						housing: [
+							{
+								title: 'My Housing Account',
+								url: 'https://sasapps.byu.edu/secure/services/main/default.aspx',
+								description: 'Manage on campus housing (single, married, and family)'
+							}
+						],
+						courses: [
+							{
+								title: 'Weekly Course Schedule', // TODO: Add a script to calculate the current semester as the query param for year_term (1: winter, 3: spring, 4: summer, 5: fall)
+								url: 'https://y.byu.edu/ry/ae/prod/registration/cgi/regMain.cgi?c=regMain&e=@ShowSched&year_term=20181',
+								description: 'Your weekly course schedule for this semester',
+								tags: ['classes']
+							},
+							{
+								title: 'MyMAP Plan',
+								url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/plan.cgi',
+								description: 'Arrange general education and major courses you want to take by semester',
+								tags: ['classes']
+							},
+							{
+								title: 'MyMAP Register',
+								url: 'https://y.byu.edu/ry/ae/prod/mymap/cgi/register.cgi',
+								description: 'Add, drop, and withdraw from courses',
+								tags: ['classes']
+							},
+							{
+								title: 'Grades',
+								url: 'https://y.byu.edu/ry/ae/prod/records/cgi/stdCourseWork.cgi',
+								description: 'See a summary of your grades (an unofficial transcript) spanning your whole time at BYU',
+								tags: ['aim']
+							},
+							{
+								title: 'Learning Suite',
+								url: 'https://learningsuite.byu.edu/',
+								description: 'See grades, turn in assignments, take quizzes, and contact teachers using BYU\'s proprietary learning management system',
+								tags: ['classes']
+							},
+							{
+								title: 'Canvas',
+								url: 'https://byu.instructure.com/',
+								description: 'See grades, turn in assignments, take quizzes, and contact teachers using a third party learning management system',
+								tags: ['classes']
+							},
+							{
+								title: 'Booklist',
+								url: 'https://booklist.byu.edu/',
+								description: 'See what books are listed as required for your courses',
+								tags: ['textbooks']
+							},
+							{
+								title: 'Testing Center',
+								url: 'https://testing.byu.edu/',
+								description: 'Check the hours for the testing center and see the current line conditions',
+								tags: ['tests', 'exams']
+							},
+							{
+								title: 'Final Exam Schedule',
+								url: 'https://y.byu.edu/ry/ae/prod/class_schedule/cgi/examStudentSchedule.cgi',
+								description: 'Find out when and where your final exams will be administered',
+								tags: ['tests', 'finals']
+							}
+						],
+						testing: [
+							{
+								title: 'Current tests',
+								url: 'https://testing.byu.edu/my-exams',
+								description: 'View current and upcoming exams and the days you can take them'
+							}
+						],
+						resources: [
+							{
+								title: 'Harold B. Lee Library (HBLL)',
+								url: 'https://lib.byu.edu/',
+								description: 'Check out books, magazines, videos, music, iPads, cameras, and more; do research across media; take software classes; use computers and recording and film studios'
+							},
+							{
+								title: 'BYU Speeches',
+								url: 'https://speeches.byu.edu/',
+								description: 'Read or listen to speeches given by professors, general authorities, and other BYU guests, alumni, and faculty',
+								tags: ['devotionals']
+							},
+							{
+								title: 'Live BYU TV',
+								url: 'https://byutvstage.byu.edu/watch/livetv',
+								description: 'Watch BYU TV live (devotionals, sports, shows)'
+							},
+							{
+								title: 'Interactive Parking Map',
+								url: 'http://map.byu.edu/?parking',
+								description: 'Find a place to park on campus',
+								tags: ['cars']
+							}
+						],
+						unofficial: [
+							{
+								title: 'Piano Locator',
+								url: 'http://pianolocator.info/',
+								description: 'Locate Pianos on campus'
+							}
+						]
 					}
-        };
-      }
+				},
+				flattenedLinks: {
+					type: Array,
+					computed: 'flattenLinks(links)'
+				},
+				filteredLinks: {
+					type: Array,
+					computed: 'filterLinks(flattenedLinks, filter)'
+				}
+			};
+		}
 
-			connectedCallback() {
-				super.connectedCallback();
-				this.shadowRoot.querySelector('#filter').select()
-				console.log('Contribute: https://github.com/intcreator/simple-byu');
-			}
+		connectedCallback() {
+			super.connectedCallback();
+			this.shadowRoot.querySelector('#filter').select()
+			console.log('Contribute: https://github.com/intcreator/simple-byu');
+		}
 
-			// take the categories, flatten and sort them for alphabetic view
-			flattenLinks(links, filter) {
-				return Object.values(links)
-					.reduce((acc, val) => acc.concat(val))
-					.sort((a, b) => a.title.localeCompare(b.title));
-			}
+		// take the categories, flatten and sort them for alphabetic view
+		flattenLinks(links, filter) {
+			return Object.values(links)
+				.reduce((acc, val) => acc.concat(val))
+				.sort((a, b) => a.title.localeCompare(b.title));
+		}
 
-			// filter links by content
-			filterLinks(flattenedLinks, filter) {
-				const re = new RegExp(filter, 'i')
-				console.log(re);
-				// get matching title links
-				const titleLinks = flattenedLinks.filter((link) => re.test(link.title));
-				// get matching description links
-				const otherLinks = flattenedLinks.filter((link) => re.test(link.description) || (link.tags && re.test(link.tags.join(' '))));
-				// TODO: search tags
-				// return title links and non-redundant description links
-				return otherLinks
-					.reduce((acc, descriptionLink) => {
-						if(!titleLinks.filter((titleLink) => descriptionLink == titleLink).length)
-							return acc ? acc.concat([descriptionLink]) : acc;
-						else return acc;
-					}, titleLinks);
-			}
+		// filter links by content
+		filterLinks(flattenedLinks, filter) {
+			const re = new RegExp(filter, 'i')
+			// get matching title links
+			const titleLinks = flattenedLinks.filter((link) => re.test(link.title));
+			// get matching description links
+			const otherLinks = flattenedLinks.filter((link) => re.test(link.description) || (link.tags && re.test(link.tags.join(' '))));
+			// TODO: search tags
+			// return title links and non-redundant description links
+			return otherLinks
+				.reduce((acc, descriptionLink) => {
+					if(!titleLinks.filter((titleLink) => descriptionLink == titleLink).length)
+						return acc ? acc.concat([descriptionLink]) : acc;
+					else return acc;
+				}, titleLinks);
+		}
 
-			getLinks(flattenedLinks, filteredLinks, filter) {
-				return (!filter || filter === '') ? flattenedLinks : filteredLinks;
-			}
+		getLinks(flattenedLinks, filteredLinks, filter) {
+			return (!filter || filter === '') ? flattenedLinks : filteredLinks;
+		}
 
     }
 
