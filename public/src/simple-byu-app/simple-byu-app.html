@@ -73,12 +73,18 @@
 								title: 'Personal Information',
 								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personSummary.cgi',
 								description: 'View and update personal information such as your name, phone, address, and marital status',
-								tags: ['ID']
+								tags: ['ID', 'profile']
 							},
 							{
 								title: 'ID Card',
 								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personIdCard.cgi',
 								description: 'View your BYU ID card, see the expiration date, or mark as lost or stolen'
+							},
+							{
+								title: 'Email Alias Manager',
+								url: 'https://eam.byu.edu/eam/',
+								description: 'Manage aliases to .edu and .net emails through BYU',
+								tags: ['studentbody', 'education']
 							},
 							{
 								title: 'Guest Access',
@@ -89,7 +95,7 @@
 								title: 'Duo',
 								url: 'https://duo.byu.edu/',
 								description: 'Set up or disable two factor authentication for your BYU account using the Duo service',
-								tags: ['2']
+								tags: ['2fa']
 							}
 						],
 						calendar: [
@@ -202,12 +208,6 @@
 								tags: ['textbooks']
 							},
 							{
-								title: 'Testing Center',
-								url: 'https://testing.byu.edu/',
-								description: 'Check the hours for the testing center and see the current line conditions',
-								tags: ['tests', 'exams']
-							},
-							{
 								title: 'Final Exam Schedule',
 								url: 'https://y.byu.edu/ry/ae/prod/class_schedule/cgi/examStudentSchedule.cgi',
 								description: 'Find out when and where your final exams will be administered',
@@ -216,9 +216,17 @@
 						],
 						testing: [
 							{
-								title: 'Current tests',
+								title: 'Testing Center',
+								url: 'https://testing.byu.edu/',
+								description: 'Check the hours for the testing center and see the current line conditions',
+								tags: ['tests', 'exams']
+							},
+							{
+								title: 'Test Schedule and Scores',
 								url: 'https://testing.byu.edu/my-exams',
-								description: 'View current and upcoming exams and the days you can take them'
+								description: 'Check when your tests will be administered and what you scored',
+								tags: ['tests', 'exams', 'testing']
+
 							}
 						],
 						resources: [
@@ -243,6 +251,11 @@
 								url: 'http://map.byu.edu/?parking',
 								description: 'Find a place to park on campus',
 								tags: ['cars']
+							},
+							{
+								title: 'Ryde Campus Bus Schedule',
+								url: 'http://www.studentmovement.com/map/routesschedules',
+								description: 'Ride to and from campus using a BYU sponsored transit system',
 							}
 						],
 						unofficial: [
