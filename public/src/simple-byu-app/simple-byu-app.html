@@ -43,7 +43,7 @@
 
 			<h2>Links</h2>
 			<template is="dom-repeat" items="[[getLinks(flattenedLinks, filteredLinks, filter)]]" as="link">
-				<h3><a href="[[link.url]]">[[link.title]]</a></h3>
+				<h3><a target="_blank" href="[[link.url]]">[[link.title]]</a></h3>
 				<p>[[link.description]]</p>
 			</template>
 
