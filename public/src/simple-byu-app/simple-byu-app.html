@@ -35,7 +35,7 @@
 		<div id="container">
 			<header>
 				<h1>Simple BYU</h1>
-				<p>This page includes links to everything that you wish was on the BYU homepage.  Contact Brandon Blätter on Slack, <a href="https://www.messenger.com/t/intcreator" target="_blank">Facebook</a>, or <a href="https://twitter.com/messages/compose?recipient_id=169717937" target="_blank">Twitter</a> (@intcreator) to suggest more links and features.  Star or fork on <a href="https://github.com/intcreator/simple-byu" target="_blank">GitHub</a>.</p>
+				<p>This page includes links to everything that you wish was on the BYU homepage.  Contact Brandon der Blätter on Slack, <a href="https://www.messenger.com/t/intcreator" target="_blank">Facebook</a>, or <a href="https://twitter.com/messages/compose?recipient_id=169717937" target="_blank">Twitter</a> (@intcreator) to suggest more links and features.  Star or fork on <a href="https://github.com/intcreator/simple-byu" target="_blank">GitHub</a>.</p>
 			</header>
 
 			<!-- TODO: ADD FILTER TEXTBOX -->
@@ -73,12 +73,18 @@
 								title: 'Personal Information',
 								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personSummary.cgi',
 								description: 'View and update personal information such as your name, phone, address, and marital status',
-								tags: ['ID']
+								tags: ['ID', 'profile']
 							},
 							{
 								title: 'ID Card',
 								url: 'https://gamma.byu.edu/ry/ae/prod/person/cgi/personIdCard.cgi',
 								description: 'View your BYU ID card, see the expiration date, or mark as lost or stolen'
+							},
+							{
+								title: 'Email Alias Manager',
+								url: 'https://eam.byu.edu/eam/',
+								description: 'Manage aliases to .edu and .net emails through BYU',
+								tags: ['studentbody', 'education']
 							},
 							{
 								title: 'Guest Access',
@@ -89,7 +95,7 @@
 								title: 'Duo',
 								url: 'https://duo.byu.edu/',
 								description: 'Set up or disable two factor authentication for your BYU account using the Duo service',
-								tags: ['2']
+								tags: ['2fa']
 							}
 						],
 						calendar: [
@@ -124,12 +130,12 @@
 							}
 						],
 						finance: [
-							{
-								title: 'Y-Time',
-								url: 'https://hrms.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_EMPLOYEE_SELF_SERVICE.Y_TL_TIME_ENTRY.GBL',
-								description: 'Clock in and out of your on-campus jobs',
-								tags: ['ytime', 'y time', 'employment']
-							},
+							// {
+							// 	title: 'Y-Time',
+							// 	url: 'https://hrms.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_EMPLOYEE_SELF_SERVICE.Y_TL_TIME_ENTRY.GBL',
+							// 	description: 'Clock in and out of your on-campus jobs',
+							// 	tags: ['ytime', 'y time', 'employment']
+							// },
 							{
 								title: 'Employee Timesheet',
 								url: 'https://hrms.byu.edu/psc/ps/EMPLOYEE/HRMS/c/ROLE_EMPLOYEE.TL_MSS_EE_SRCH_PRD.GBL',
@@ -139,7 +145,7 @@
 								title: 'View Paychecks',
 								url: 'https://hrms.byu.edu/psp/ps/EMPLOYEE/HRMS/c/ROLE_EMPLOYEE.PY_IC_PAY_INQ.GBL?NAVSTACK=Clear',
 								description: 'View records of your previous paychecks, including your gross earnings and tax withholdings'
-							}
+							},
 							{
 								title: 'My Financial Center',
 								url: 'https://sa.byu.edu/psp/ps/EMPLOYEE/HRMS/c/Y_MY_FINANCIAL_CENTER.Y_MFC_HOME',
@@ -202,12 +208,6 @@
 								tags: ['textbooks']
 							},
 							{
-								title: 'Testing Center',
-								url: 'https://testing.byu.edu/',
-								description: 'Check the hours for the testing center and see the current line conditions',
-								tags: ['tests', 'exams']
-							},
-							{
 								title: 'Final Exam Schedule',
 								url: 'https://y.byu.edu/ry/ae/prod/class_schedule/cgi/examStudentSchedule.cgi',
 								description: 'Find out when and where your final exams will be administered',
@@ -216,9 +216,17 @@
 						],
 						testing: [
 							{
-								title: 'Current tests',
+								title: 'Testing Center',
+								url: 'https://testing.byu.edu/',
+								description: 'Check the hours for the testing center and see the current line conditions',
+								tags: ['tests', 'exams']
+							},
+							{
+								title: 'Test Schedule and Scores',
 								url: 'https://testing.byu.edu/my-exams',
-								description: 'View current and upcoming exams and the days you can take them'
+								description: 'Check when your tests will be administered and what you scored',
+								tags: ['tests', 'exams', 'testing']
+
 							}
 						],
 						resources: [
@@ -243,6 +251,11 @@
 								url: 'http://map.byu.edu/?parking',
 								description: 'Find a place to park on campus',
 								tags: ['cars']
+							},
+							{
+								title: 'Ryde Campus Bus Schedule',
+								url: 'http://www.studentmovement.com/map/routesschedules',
+								description: 'Ride to and from campus using a BYU sponsored transit system',
 							}
 						],
 						unofficial: [
