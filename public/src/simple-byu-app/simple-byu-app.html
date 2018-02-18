@@ -13,6 +13,19 @@
 				font-family: Roboto, sans-serif;
 			}
 
+			a {
+				text-decoration: none;
+				color: #2541b3;
+			}
+
+			a:visited {
+				color: #74289a;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+
 			#container {
 				max-width: 800px;
 				margin: auto;
@@ -30,20 +43,38 @@
 				font-size: 1em;
 			}
 
+			.filter {
+				width: 100%;
+				font-size: 1.5em;
+				margin: 5vh 0 70vh;
+				box-sizing: border-box;
+			}
+
+			.filter-active {
+				margin: 5vh 0;
+			}
+
+			#logo {
+				width: 100%;
+			}
+
     </style>
 
 		<div id="container">
 			<header>
-				<h1>Simple BYU</h1>
-				<p>This page includes links to everything that you wish was on the BYU homepage.  Contact Brandon der Blätter on Slack, <a href="https://www.messenger.com/t/intcreator" target="_blank">Facebook</a>, or <a href="https://twitter.com/messages/compose?recipient_id=169717937" target="_blank">Twitter</a> (@intcreator) to suggest more links and features.  Star or fork on <a href="https://github.com/intcreator/simple-byu" target="_blank">GitHub</a>.</p>
+				<img id="logo" src="../../images/logo.png" alt="Simple BYU">
+				<details>
+					<summary>About Simple BYU...</summary>
+					<p>This page includes links to everything that you wish was on the BYU homepage.  Contact Brandon der Blätter on Discord, Slack, <a href="https://www.messenger.com/t/intcreator" target="_blank">Facebook</a>, or <a href="https://twitter.com/messages/compose?recipient_id=169717937" target="_blank">Twitter</a> (@intcreator) to suggest more links and features.  Star or fork on <a href="https://github.com/intcreator/simple-byu" target="_blank">GitHub</a>.</p>
+					<p>Think this site should have its own domain?  Donate to the <a href="https://www.paypal.com/donate/?token=qbBunNFQ3Cm6GMAyiXjlhz_wQ0H6mZ2XGf4Uud3dcoq_QOTewt3KXOLZI6B4kE5Wwk3vHW">domain fund</a>.</p>
+				</details>
 			</header>
 
-			<!-- TODO: ADD FILTER TEXTBOX -->
-			<p><iron-input bind-value="{{bindValue}}"><input id="filter" value="{{filter::input}}" placeholder="Filter..."></iron-input></iron-input></p>
+			<iron-input bind-value="{{bindValue}}"><input class="filter" value="{{filter::input}}" placeholder="Type to search..." on-keydown="visitLink"></iron-input></iron-input>
 
 			<h2>Links</h2>
 			<template is="dom-repeat" items="[[getLinks(flattenedLinks, filteredLinks, filter)]]" as="link">
-				<h3><a href="[[link.url]]">[[link.title]]</a></h3>
+				<h3><a class="result-link" href="[[link.url]]">[[link.title]]</a></h3>
 				<p>[[link.description]]</p>
 			</template>
 
@@ -280,8 +311,9 @@
 
 		connectedCallback() {
 			super.connectedCallback();
-			this.shadowRoot.querySelector('#filter').select()
-			console.log('Contribute: https://github.com/intcreator/simple-byu');
+			// select the filter by default when the page is loaded
+			this.shadowRoot.querySelector('.filter').select()
+			console.log('Star or fork: https://github.com/intcreator/simple-byu');
 		}
 
 		// take the categories, flatten and sort them for alphabetic view
@@ -293,6 +325,8 @@
 
 		// filter links by content
 		filterLinks(flattenedLinks, filter) {
+			// condense space when a search starts
+			if(this.shadowRoot) this.shadowRoot.querySelector('.filter').classList.add('filter-active')
 			const re = new RegExp(filter, 'i')
 			// get matching title links
 			const titleLinks = flattenedLinks.filter((link) => re.test(link.title));
@@ -310,6 +344,10 @@
 
 		getLinks(flattenedLinks, filteredLinks, filter) {
 			return (!filter || filter === '') ? flattenedLinks : filteredLinks;
+		}
+
+		visitLink(e) {
+			if(e.keyCode === 13) this.shadowRoot.querySelector('.result-link').click();
 		}
 
     }
