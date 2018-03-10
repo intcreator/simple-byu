@@ -17,3 +17,7 @@ A simplified version of BYU's homepage.  https://simple-byu.firebaseapp.com
 - Must follow Polymer 2.0 format and best practices
 - Use functional code (not imperative) where possible
 - Make an issue to discuss large changes before creating a giant pull request
+
+## Domain Fund
+
+Enjoying Simple BYU?  Think it should have its own domain name?  Donate to the [domain fund](https://www.paypal.me/intcreator/1).
